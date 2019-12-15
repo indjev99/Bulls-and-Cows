@@ -1,5 +1,7 @@
-#include "util.h"
+#include "utils.h"
 #include "params.h"
+#include <stdlib.h>
+#include <time.h>
 
 bool isNumberValid(int number)
 {
@@ -55,4 +57,26 @@ Response findResponse(int number, int guess)
         else if (used[dig]) ++cows;
     }
     return {bulls, cows};
+}
+int randomNumber()
+{
+    int poss = 1;
+    int maxNumber = 1;
+    for (int i = 0; i < DIGS; ++i)
+    {
+        poss *= i ? BASE : BASE - 1;
+        maxNumber *= BASE;
+    }
+    --maxNumber;
+    int number = 0;
+    while (!isNumberValid(number))
+    {
+        int rng = rand() * (RAND_MAX + 1) + rand();
+        number = maxNumber - rng % poss;
+    }
+    return number;
+}
+void initRandomizer()
+{
+    srand(time(0));
 }

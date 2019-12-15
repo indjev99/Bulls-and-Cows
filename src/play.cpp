@@ -1,5 +1,5 @@
 #include "play.h"
-#include "util.h"
+#include "utils.h"
 #include <vector>
 
 struct Exchange
@@ -29,17 +29,17 @@ int play(Guesser* guesser, Thinker* thinker, int maxGuesses)
     {
         ++numGuesses;
         int guess = guesser->makeGuess(response);
-        if (!isNumberValid(guess)) return G_FAILED;
+        if (!isNumberValid(guess)) return G_FAIL;
         response = thinker->getResponse(guess);
-        if (!isResponseValid(response)) return T_FAILED;
+        if (!isResponseValid(response)) return T_FAIL;
         exchanges.push_back(Exchange(guess, response));
     }
     int number = thinker->getNumber();
-    if (!isNumberValid(number)) return T_FAILED;
+    if (!isNumberValid(number)) return T_FAIL;
     for (const Exchange& exchange : exchanges)
     {
-        if (!exchange.checkValid(number)) return T_FAILED;
+        if (!exchange.checkValid(number)) return T_FAIL;
     }
-    if (!isResponseFinal(response)) return G_FAILED;
+    if (!isResponseFinal(response)) return G_FAIL;
     return numGuesses;
 }

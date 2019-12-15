@@ -4,9 +4,9 @@
 #include "guesser.h"
 #include "thinker.h"
 
-#define G_FAILED -1
-#define T_FAILED -2
+#define G_FAIL -1
+#define T_FAIL -2
 
-int play(Guesser* guesser, Thinker* thinker);
+int play(Guesser* guesser, Thinker* thinker, int maxGueses=10000);
 
 #endif // PLAY_H_INCLUDED

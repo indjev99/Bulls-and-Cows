@@ -23,17 +23,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="guesser.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="params.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="play.cpp" />
-		<Unit filename="play.h" />
-		<Unit filename="response.h" />
-		<Unit filename="thinker.h" />
-		<Unit filename="util.cpp" />
-		<Unit filename="util.h" />
+		<Unit filename="src/guesser.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/params.h" />
+		<Unit filename="src/play.cpp" />
+		<Unit filename="src/play.h" />
+		<Unit filename="src/random_guesser.cpp" />
+		<Unit filename="src/random_guesser.h" />
+		<Unit filename="src/random_thinker.cpp" />
+		<Unit filename="src/random_thinker.h" />
+		<Unit filename="src/response.h" />
+		<Unit filename="src/thinker.h" />
+		<Unit filename="src/utils.cpp" />
+		<Unit filename="src/utils.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
