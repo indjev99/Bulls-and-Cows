@@ -22,16 +22,19 @@ bool isNumberValid(int number)
     if (number > 0) return false;
     return true;
 }
+
 bool isResponseValid(const Response& response)
 {
     int b = response.bulls;
     int c = response.cows;
     return b >= 0 && c >= 0 && b + c <= DIGS && (b != DIGS - 1 || c != 1);
 }
+
 bool isResponseFinal(const Response& response)
 {
     return response.bulls == DIGS;
 }
+
 Response findResponse(int number, int guess)
 {
     bool used[BASE];
@@ -58,24 +61,19 @@ Response findResponse(int number, int guess)
     }
     return {bulls, cows};
 }
+
 int randomNumber()
 {
-    int poss = 1;
-    int maxNumber = 1;
-    for (int i = 0; i < DIGS; ++i)
-    {
-        poss *= i ? BASE : BASE - 1;
-        maxNumber *= BASE;
-    }
-    --maxNumber;
-    int number = 0;
-    while (!isNumberValid(number))
+    int number;
+    do
     {
         int rng = rand() * (RAND_MAX + 1) + rand();
-        number = maxNumber - rng % poss;
+        number = rng % POS_NUMS + MIN_NUM;
     }
+    while (!isNumberValid(number));
     return number;
 }
+
 void initRandomizer()
 {
     srand(time(0));
