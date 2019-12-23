@@ -9,7 +9,7 @@ struct RandomThinker : Thinker
     Response getResponse(int guess);
     int getNumber();
 
-private:
+protected:
     int number;
 };
 

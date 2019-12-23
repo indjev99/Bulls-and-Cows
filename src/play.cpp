@@ -29,7 +29,8 @@ struct Timer
     void stop()
     {
         endTimePoint = std::chrono::high_resolution_clock::now();
-        time += (endTimePoint - startTimePoint).count();
+        using seconds = std::chrono::duration<double, std::ratio<1, 1>>;
+        time += seconds(endTimePoint - startTimePoint).count();
     }
 
 protected:

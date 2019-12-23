@@ -4,8 +4,8 @@
 #include "guesser.h"
 #include "thinker.h"
 
-const int G_FAIL = -1e9;
-const int T_FAIL = 1e9;
+const int G_FAIL = 1e9;
+const int T_FAIL = -1e9;
 
 const int P1_WIN = 1;
 const int P2_WIN = -1;

@@ -23,6 +23,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="src/fixed_thinker.cpp" />
+		<Unit filename="src/fixed_thinker.h" />
+		<Unit filename="src/games.cpp" />
+		<Unit filename="src/games.h" />
 		<Unit filename="src/guesser.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/params.h" />
