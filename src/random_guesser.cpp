@@ -3,7 +3,7 @@
 
 void RandomGuesser::reset() {}
 
-int RandomGuesser::makeGuess(const Response& response)
+int RandomGuesser::makeGuess(int guess, const Response& response)
 {
     return randomNumber();
 }

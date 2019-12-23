@@ -22,9 +22,6 @@ protected:
     std::chrono::time_point<std::chrono::high_resolution_clock> startTimePoint, endTimePoint;
 };
 
-#include <iostream>
-using namespace std;
-
 int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuesses)
 {
     Timer gTimer;
@@ -39,6 +36,7 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
     tTimer.stop();
 
     int numGuesses = 0;
+    int guess = 0;
     Response response = {0, 0};
     Tracker tracker;
     tracker.reset();
@@ -47,7 +45,7 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
         ++numGuesses;
 
         gTimer.start();
-        int guess = guesser->makeGuess(response);
+        guess = guesser->makeGuess(guess, response);
         gTimer.stop();
         if (!isNumberValid(guess) || gTimer.time > timeLimit) return G_FAIL;
 

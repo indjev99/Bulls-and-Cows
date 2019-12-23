@@ -35,7 +35,7 @@ inline static bool validCondition(int number, int guess, const Response& respons
 void Tracker::update(int guess, const Response& response)
 {
     std::unordered_set<int>::iterator it = valid.begin();
-    while(it != valid.end())
+    while (it != valid.end())
 	{
 		if (!validCondition(*it, guess, response)) it = valid.erase(it);
 		else it++;

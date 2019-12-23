@@ -6,7 +6,7 @@
 struct RandomGuesser : Guesser
 {
     void reset();
-    int makeGuess(const Response& response);
+    int makeGuess(int guess, const Response& response);
 };
 
 #endif // RANDOM_GUESSER_H_INCLUDED
