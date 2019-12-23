@@ -10,8 +10,3 @@ Response RandomThinker::getResponse(int guess)
 {
     return findResponse(number, guess);
 }
-
-int RandomThinker::getNumber()
-{
-    return number;
-}

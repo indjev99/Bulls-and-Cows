@@ -65,3 +65,26 @@ void profile(Guesser* guesser, double timeLimit)
         std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
     }
 }
+
+void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames)
+{
+    double avgRes = 0;
+    int maxRes = 0;
+    for (int i = 0; i < numGames; ++i)
+    {
+        int result = playRound(guesser, thinker, timeLimit);
+        avgRes += result;
+        maxRes = std::max(maxRes, result);
+    }
+    avgRes /= numGames;
+
+    if (maxRes == G_FAIL)
+    {
+        std::cout << "Doesn't always guess correctly." << std::endl;
+    }
+    else
+    {
+        std::cout << "Average number of guesses needed: " << avgRes << std::endl;
+        std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
+    }
+}

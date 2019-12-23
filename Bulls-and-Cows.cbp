@@ -38,6 +38,8 @@
 		<Unit filename="src/random_thinker.h" />
 		<Unit filename="src/response.h" />
 		<Unit filename="src/thinker.h" />
+		<Unit filename="src/tracker.cpp" />
+		<Unit filename="src/tracker.h" />
 		<Unit filename="src/utils.cpp" />
 		<Unit filename="src/utils.h" />
 		<Extensions>

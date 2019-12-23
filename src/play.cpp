@@ -1,22 +1,7 @@
 #include "play.h"
 #include "utils.h"
-#include <vector>
+#include "tracker.h"
 #include <chrono>
-
-struct Exchange
-{
-    int guess;
-    Response response;
-
-    Exchange(int guess, const Response& response):
-        guess(guess),
-        response(response) {};
-    bool checkValid(int number) const
-    {
-        Response correct = findResponse(number, guess);
-        return response.bulls == correct.bulls && response.cows == correct.cows;
-    }
-};
 
 struct Timer
 {
@@ -37,6 +22,9 @@ protected:
     std::chrono::time_point<std::chrono::high_resolution_clock> startTimePoint, endTimePoint;
 };
 
+#include <iostream>
+using namespace std;
+
 int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuesses)
 {
     Timer gTimer;
@@ -52,7 +40,8 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
 
     int numGuesses = 0;
     Response response = {0, 0};
-    std::vector<Exchange> exchanges;
+    Tracker tracker;
+    tracker.reset();
     while (!isResponseFinal(response) && numGuesses < maxGuesses)
     {
         ++numGuesses;
@@ -60,29 +49,15 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
         gTimer.start();
         int guess = guesser->makeGuess(response);
         gTimer.stop();
-        if (!isNumberValid(guess)) return G_FAIL;
-
-        if (gTimer.time > timeLimit) break;
+        if (!isNumberValid(guess) || gTimer.time > timeLimit) return G_FAIL;
 
         tTimer.start();
         response = thinker->getResponse(guess);
         tTimer.stop();
-        if (!isResponseValid(response) || tTimer.time > timeLimit) return T_FAIL;
-
-        exchanges.push_back(Exchange(guess, response));
+        tracker.update(guess, response);
+        if (!isResponseValid(response) || tracker.numValid() == 0 || tTimer.time > timeLimit) return T_FAIL;
     }
-
-    tTimer.start();
-    int number = thinker->getNumber();
-    tTimer.stop();
-    if (!isNumberValid(number)) return T_FAIL;
-    for (const Exchange& exchange : exchanges)
-    {
-        if (!exchange.checkValid(number)) return T_FAIL;
-    }
-
-    if (!isResponseFinal(response) || gTimer.time > timeLimit) return G_FAIL;
-
+    if (!isResponseFinal(response)) return G_FAIL;
     return numGuesses;
 }
 

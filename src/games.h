@@ -6,5 +6,6 @@
 
 void battle(Guesser* guesser1, Thinker* thinker1, Guesser* guesser2, Thinker* thinker2, double timeLimit, int numGames, bool verbose=false);
 void profile(Guesser* guesser, double timeLimit);
+void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames);
 
 #endif // GAMES_H_INCLUDED

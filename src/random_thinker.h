@@ -7,7 +7,6 @@ struct RandomThinker : Thinker
 {
     void reset();
     Response getResponse(int guess);
-    int getNumber();
 
 protected:
     int number;

@@ -7,7 +7,6 @@ struct FixedThinker : Thinker
 {
     void reset();
     Response getResponse(int guess);
-    int getNumber();
 
     void setNumber(int number);
 
