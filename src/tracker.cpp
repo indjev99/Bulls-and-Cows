@@ -1,6 +1,7 @@
 #include "tracker.h"
 #include "params.h"
 #include "utils.h"
+#include <algorithm>
 
 void Tracker::reset()
 {
@@ -26,7 +27,12 @@ const std::unordered_set<int>& Tracker::allValid()
     return valid;
 }
 
-inline static bool validCondition(int number, int guess, const Response& response)
+bool Tracker::isValid(int number)
+{
+    return valid.find(number) != valid.end();
+}
+
+static bool validCondition(int number, int guess, const Response& response)
 {
     Response correct = findResponse(number, guess);
     return correct.bulls == response.bulls && correct.cows == response.cows;
@@ -40,9 +46,24 @@ void Tracker::update(int guess, const Response& response)
 		if (!validCondition(*it, guess, response)) it = valid.erase(it);
 		else it++;
 	}
-    /*for (int num : valid)
+}
+
+int Tracker::numValidAfterUpdate(int guess, const Response& response)
+{
+    int cnt = 0;
+    for (int num : valid)
     {
-        Response correct = findResponse(num, guess);
-        if (correct.bulls != response.bulls || correct.cows != response.cows) valid.erase(num);
-    }*/
+        if (validCondition(num, guess, response)) ++cnt;
+    }
+    return cnt;
+}
+
+int Tracker::split(int guess)
+{
+    std::vector<int> cnts(validResponses.size());
+    for (int number : valid)
+    {
+        ++cnts[responseToCode(findResponse(number, guess))];
+    }
+    return *std::max_element(cnts.begin(), cnts.end());
 }

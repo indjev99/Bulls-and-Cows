@@ -3,10 +3,5 @@
 
 void RandomThinker::reset()
 {
-    number = randomNumber();
-}
-
-Response RandomThinker::getResponse(int guess)
-{
-    return findResponse(number, guess);
+    setNumber(randomNumber());
 }

@@ -5,7 +5,7 @@
 
 struct Thinker
 {
-    virtual void reset() = 0;
+    virtual void reset() {};
     virtual Response getResponse(int guess) = 0;
 };
 

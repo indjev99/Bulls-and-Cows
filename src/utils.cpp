@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "params.h"
+#include <unordered_map>
 #include <stdlib.h>
 #include <time.h>
 
@@ -77,4 +78,29 @@ int randomNumber()
 void initRandomizer()
 {
     srand(time(0));
+}
+
+static int codeMap[DIGS + 1][DIGS + 1];
+
+static std::vector<Response> findAllValidResponses()
+{
+    std::vector<Response> validResponses;
+    for (int i = 0; i < (DIGS + 1) * (DIGS + 1); ++i)
+    {
+        int bulls = i / (DIGS + 1);
+        int cows = i % (DIGS + 1);
+        if (isResponseValid({bulls, cows}))
+        {
+            codeMap[bulls][cows] = validResponses.size();
+            validResponses.push_back({bulls, cows});
+        }
+    }
+    return validResponses;
+}
+
+const std::vector<Response> validResponses = findAllValidResponses();
+
+int responseToCode(const Response& response)
+{
+    return codeMap[response.bulls][response.cows];
 }

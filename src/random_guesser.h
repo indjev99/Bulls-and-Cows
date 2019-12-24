@@ -3,9 +3,8 @@
 
 #include "guesser.h"
 
-struct RandomGuesser : Guesser
+struct RandomGuesser final : Guesser
 {
-    void reset();
     int makeGuess(int guess, const Response& response);
 };
 

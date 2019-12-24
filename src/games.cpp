@@ -49,6 +49,7 @@ void profile(Guesser* guesser, double timeLimit)
         if (!isNumberValid(i)) continue;
         thinker.setNumber(i);
         int result = playRound(guesser, &thinker, timeLimit);
+        std::cerr << i << " : " << result << std::endl;
         ++cnt;
         avgRes += result;
         maxRes = std::max(maxRes, result);

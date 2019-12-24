@@ -5,12 +5,11 @@
 
 struct FixedThinker : Thinker
 {
-    void reset();
-    Response getResponse(int guess);
+    Response getResponse(int guess) final;
 
     void setNumber(int number);
 
-protected:
+private:
     int number;
 };
 

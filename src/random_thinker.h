@@ -1,15 +1,11 @@
 #ifndef RANDOM_THINKER_H_INCLUDED
 #define RANDOM_THINKER_H_INCLUDED
 
-#include "thinker.h"
+#include "fixed_thinker.h"
 
-struct RandomThinker : Thinker
+struct RandomThinker : FixedThinker
 {
     void reset();
-    Response getResponse(int guess);
-
-protected:
-    int number;
 };
 
 #endif // RANDOM_THINKER_H_INCLUDED

@@ -23,10 +23,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="src/dummy_guesser.cpp" />
+		<Unit filename="src/dummy_guesser.h" />
 		<Unit filename="src/fixed_thinker.cpp" />
 		<Unit filename="src/fixed_thinker.h" />
 		<Unit filename="src/games.cpp" />
 		<Unit filename="src/games.h" />
+		<Unit filename="src/greedy_guesser.cpp" />
+		<Unit filename="src/greedy_guesser.h" />
+		<Unit filename="src/greedy_thinker.cpp" />
+		<Unit filename="src/greedy_thinker.h" />
 		<Unit filename="src/guesser.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/params.h" />
@@ -40,8 +46,14 @@
 		<Unit filename="src/thinker.h" />
 		<Unit filename="src/tracker.cpp" />
 		<Unit filename="src/tracker.h" />
+		<Unit filename="src/tracker_guesser.h" />
+		<Unit filename="src/tracker_guessert.cpp" />
+		<Unit filename="src/tracker_thinker.cpp" />
+		<Unit filename="src/tracker_thinker.h" />
 		<Unit filename="src/utils.cpp" />
 		<Unit filename="src/utils.h" />
+		<Unit filename="src/valid_guesser.cpp" />
+		<Unit filename="src/valid_guesser.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

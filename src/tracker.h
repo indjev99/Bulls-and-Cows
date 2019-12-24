@@ -10,7 +10,10 @@ struct Tracker
     int numValid();
     int oneValid();
     const std::unordered_set<int>& allValid();
+    bool isValid(int number);
     void update(int guess, const Response& response);
+    int numValidAfterUpdate(int guess, const Response& response);
+    int split(int guess);
 
 protected:
     std::unordered_set<int> valid;

@@ -5,7 +5,7 @@
 
 struct Guesser
 {
-    virtual void reset() = 0;
+    virtual void reset() {};
     virtual int makeGuess(int guess, const Response& response) = 0;
 };
 
