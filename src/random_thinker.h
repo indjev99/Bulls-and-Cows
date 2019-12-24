@@ -3,9 +3,9 @@
 
 #include "fixed_thinker.h"
 
-struct RandomThinker : FixedThinker
+struct RandomThinker final : FixedThinker
 {
-    void reset();
+    void reset() override;
 };
 
 #endif // RANDOM_THINKER_H_INCLUDED

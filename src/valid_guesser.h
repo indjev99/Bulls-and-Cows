@@ -6,7 +6,7 @@
 struct ValidGuesser final : TrackerGuesser
 {
 protected:
-    int decideGuess();
+    int decideGuess() override;
 };
 
 #endif // VALID_GUESSER_H_INCLUDED
