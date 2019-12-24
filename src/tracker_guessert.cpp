@@ -2,14 +2,14 @@
 
 void TrackerGuesser::reset()
 {
-    turn = 0;
-    tracker.reset();
+    _turn = 0;
+    _tracker.reset();
 }
 
 int TrackerGuesser::makeGuess(int guess, const Response& response)
 {
-    ++turn;
-    if (turn > 1) tracker.update(guess, response);
+    ++_turn;
+    if (turn > 1) _tracker.update(guess, response);
     if (tracker.numValid() == 1) return tracker.oneValid();
     return decideGuess();
 }

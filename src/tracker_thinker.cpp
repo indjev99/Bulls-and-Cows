@@ -2,14 +2,14 @@
 
 void TrackerThinker::reset()
 {
-    turn = 0;
-    tracker.reset();
+    _turn = 0;
+    _tracker.reset();
 }
 
 Response TrackerThinker::getResponse(int guess)
 {
-    ++turn;
+    ++_turn;
     Response response = decideResponse(guess);
-    tracker.update(guess, response);
+    _tracker.update(guess, response);
     return response;
 }

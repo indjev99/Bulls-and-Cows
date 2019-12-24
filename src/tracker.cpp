@@ -12,22 +12,22 @@ void Tracker::reset()
     }
 }
 
-int Tracker::numValid()
+int Tracker::numValid() const
 {
     return valid.size();
 }
 
-int Tracker::oneValid()
+int Tracker::oneValid() const
 {
     return *valid.begin();
 }
 
-const std::unordered_set<int>& Tracker::allValid()
+const std::unordered_set<int>& Tracker::allValid() const
 {
     return valid;
 }
 
-bool Tracker::isValid(int number)
+bool Tracker::isValid(int number) const
 {
     return valid.find(number) != valid.end();
 }
@@ -48,7 +48,7 @@ void Tracker::update(int guess, const Response& response)
 	}
 }
 
-int Tracker::numValidAfterUpdate(int guess, const Response& response)
+int Tracker::numValidAfterUpdate(int guess, const Response& response) const
 {
     int cnt = 0;
     for (int num : valid)
@@ -58,7 +58,7 @@ int Tracker::numValidAfterUpdate(int guess, const Response& response)
     return cnt;
 }
 
-int Tracker::split(int guess)
+int Tracker::split(int guess) const
 {
     std::vector<int> cnts(validResponses.size());
     for (int number : valid)

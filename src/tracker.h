@@ -7,13 +7,13 @@
 struct Tracker
 {
     void reset();
-    int numValid();
-    int oneValid();
-    const std::unordered_set<int>& allValid();
-    bool isValid(int number);
+    int numValid() const;
+    int oneValid() const;
+    const std::unordered_set<int>& allValid() const;
+    bool isValid(int number) const;
     void update(int guess, const Response& response);
-    int numValidAfterUpdate(int guess, const Response& response);
-    int split(int guess);
+    int numValidAfterUpdate(int guess, const Response& response) const;
+    int split(int guess) const;
 
 protected:
     std::unordered_set<int> valid;

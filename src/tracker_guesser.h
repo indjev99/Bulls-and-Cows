@@ -10,10 +10,14 @@ struct TrackerGuesser : Guesser
     int makeGuess(int guess, const Response& response) final;
 
 protected:
-    int turn;
-    Tracker tracker;
+    const int& turn = _turn;
+    const Tracker& tracker = _tracker;
 
     virtual int decideGuess() =0;
+
+private:
+    int _turn;
+    Tracker _tracker;
 };
 
 #endif // TRACKER_GUESSER_H_INCLUDED

@@ -10,10 +10,14 @@ struct TrackerThinker : Thinker
     Response getResponse(int guess) final;
 
 protected:
-    int turn;
-    Tracker tracker;
+    const int& turn = _turn;
+    const Tracker& tracker = _tracker;
 
     virtual Response decideResponse(int guess) =0;
+
+private:
+    int _turn;
+    Tracker _tracker;
 };
 
 #endif // TRACKER_THINKER_H_INCLUDED
