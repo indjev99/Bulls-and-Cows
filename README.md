@@ -1,3 +1,2 @@
 # Bulls-and-Cows
-
-OOP Implementation of the bulls and cows game.
+Object-oriented implementation of the Bulls and Cows game.

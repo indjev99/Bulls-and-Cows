@@ -5,13 +5,16 @@
 #include <vector>
 
 bool isNumberValid(int number);
+extern const std::vector<int> validNumbers;
+int numberToIndex(int number, const Response& response);
+
 bool isResponseValid(const Response& response);
+extern const std::vector<Response> validResponses;
+int responseToIndex(const Response& response);
 bool isResponseFinal(const Response& response);
 Response findResponse(int number, int guess);
+
 int randomNumber();
 void initRandomizer();
-
-extern const std::vector<Response> validResponses;
-int responseToCode(const Response& response);
 
 #endif // UTIL_H_INCLUDED

@@ -1,15 +1,11 @@
 #include "tracker.h"
-#include "params.h"
 #include "utils.h"
 #include <algorithm>
 
 void Tracker::reset()
 {
     valid.clear();
-    for (int i = MIN_NUM; i <= MAX_NUM; ++i)
-    {
-        if (isNumberValid(i)) valid.insert(i);
-    }
+    std::copy(validNumbers.begin(), validNumbers.end(), std::inserter(valid, valid.begin()));
 }
 
 int Tracker::numValid() const
@@ -63,7 +59,7 @@ int Tracker::split(int guess) const
     std::vector<int> cnts(validResponses.size());
     for (int number : valid)
     {
-        ++cnts[responseToCode(findResponse(number, guess))];
+        ++cnts[responseToIndex(findResponse(number, guess))];
     }
     return *std::max_element(cnts.begin(), cnts.end());
 }

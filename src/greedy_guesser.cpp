@@ -1,11 +1,11 @@
 #include "greedy_guesser.h"
-#include "params.h"
+#include "utils.h"
 
 int GreedyGuesser::decideGuess()
 {
-    if (turn == 1) return 1234;
+    if (turn == 1) return randomNumber();
 
-    int bestValue = POS_NUMS;
+    int bestValue = tracker.numValid();
     int bestGuess = 0;
     for (int guess : tracker.allValid())
     {

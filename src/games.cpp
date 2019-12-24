@@ -1,6 +1,5 @@
 #include "games.h"
 #include "play.h"
-#include "params.h"
 #include "utils.h"
 #include "fixed_thinker.h"
 #include <iostream>
@@ -43,18 +42,15 @@ void profile(Guesser* guesser, double timeLimit)
     FixedThinker thinker;
     double avgRes = 0;
     int maxRes = 0;
-    int cnt = 0;
-    for (int i = MIN_NUM; i <= MAX_NUM; ++i)
-    {
-        if (!isNumberValid(i)) continue;
-        thinker.setNumber(i);
+    for (int number : validNumbers)
+    {;
+        thinker.setNumber(number);
         int result = playRound(guesser, &thinker, timeLimit);
-        std::cerr << i << " : " << result << std::endl;
-        ++cnt;
+        std::cerr << number << " : " << result << std::endl;
         avgRes += result;
         maxRes = std::max(maxRes, result);
     }
-    avgRes /= cnt;
+    avgRes /= validNumbers.size();
 
     if (maxRes == G_FAIL)
     {

@@ -35,6 +35,7 @@
 		<Unit filename="src/greedy_thinker.h" />
 		<Unit filename="src/guesser.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/number_range.h" />
 		<Unit filename="src/params.h" />
 		<Unit filename="src/play.cpp" />
 		<Unit filename="src/play.h" />
