@@ -37,20 +37,27 @@ void battle(Guesser* guesser1, Thinker* thinker1, Guesser* guesser2, Thinker* th
     std::cout << "Draws: " << draws << std::endl;
 }
 
-void profile(Guesser* guesser, double timeLimit)
+void profile(Guesser* guesser, double timeLimit, int numIterations)
 {
     FixedThinker thinker;
     double avgRes = 0;
     int maxRes = 0;
+    int cnt = 0;
     for (int number : validNumbers)
-    {;
-        thinker.setNumber(number);
-        int result = playRound(guesser, &thinker, timeLimit);
-        std::cerr << number << " : " << result << std::endl;
-        avgRes += result;
-        maxRes = std::max(maxRes, result);
+    {
+        for (int i = 0; i < numIterations; ++i)
+        {
+            thinker.setNumber(number);
+            int result = playRound(guesser, &thinker, timeLimit);
+            avgRes += result;
+            maxRes = std::max(maxRes, result);
+            //std::cerr << number << " : " << result << std::endl;
+        }
+        if (cnt % 100 == 0) std::cout << ".";
+        ++cnt;
     }
-    avgRes /= validNumbers.size();
+    avgRes /= validNumbers.size() * numIterations;
+    std::cout << std::endl;
 
     if (maxRes == G_FAIL)
     {
@@ -72,8 +79,10 @@ void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames)
         int result = playRound(guesser, thinker, timeLimit);
         avgRes += result;
         maxRes = std::max(maxRes, result);
+        std::cerr << result << " ";
     }
     avgRes /= numGames;
+    std::cerr << std::endl;
 
     if (maxRes == G_FAIL)
     {

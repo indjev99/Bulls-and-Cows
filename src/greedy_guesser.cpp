@@ -1,15 +1,14 @@
 #include "greedy_guesser.h"
-#include "utils.h"
 
 int GreedyGuesser::decideGuess()
 {
-    if (turn == 1) return randomNumber();
+    if (turn == 1) return tracker.oneValid();
 
     int bestValue = tracker.numValid();
     int bestGuess = 0;
     for (int guess : tracker.allValid())
     {
-        int value = tracker.split(guess);
+        int value = tracker.worstSplitSize(guess);
         if (value < bestValue)
         {
             bestValue = value;

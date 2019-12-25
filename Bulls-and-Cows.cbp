@@ -7,19 +7,17 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release">
-				<Option output="bin/Release/Bulls-and-Cows" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="bin/Bulls-and-Cows" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-O3" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
@@ -34,6 +32,10 @@
 		<Unit filename="src/greedy_thinker.cpp" />
 		<Unit filename="src/greedy_thinker.h" />
 		<Unit filename="src/guesser.h" />
+		<Unit filename="src/lookahead_guesser.cpp" />
+		<Unit filename="src/lookahead_guesser.h" />
+		<Unit filename="src/lookahead_thinker.cpp" />
+		<Unit filename="src/lookahead_thinker.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/number_range.h" />
 		<Unit filename="src/params.h" />
@@ -55,6 +57,8 @@
 		<Unit filename="src/utils.h" />
 		<Unit filename="src/valid_guesser.cpp" />
 		<Unit filename="src/valid_guesser.h" />
+		<Unit filename="src/valid_thinker.cpp" />
+		<Unit filename="src/valid_thinker.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

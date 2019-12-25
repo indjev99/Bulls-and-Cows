@@ -11,7 +11,7 @@ const int P1_WIN = 1;
 const int P2_WIN = -1;
 const int DRAW = 0;
 
-int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuesses=1000);
-int playGame(Guesser* guesser1, Thinker* thinker1, Guesser* guesser2, Thinker* thinker2, double timeLimit, int maxGuesses=1000);
+int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuesses=100);
+int playGame(Guesser* guesser1, Thinker* thinker1, Guesser* guesser2, Thinker* thinker2, double timeLimit, int maxGuesses=100);
 
 #endif // PLAY_H_INCLUDED

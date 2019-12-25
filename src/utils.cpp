@@ -110,6 +110,11 @@ int responseToIndex(const Response& response)
 
 int randomNumber()
 {
+    return randomNumber(validNumbers);
+}
+
+int randomNumber(const std::vector<int>& validNumbers)
+{
     int rng = rand() * (RAND_MAX + 1) + rand();
     return validNumbers[rng % validNumbers.size()];
 }

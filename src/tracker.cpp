@@ -5,7 +5,9 @@
 void Tracker::reset()
 {
     valid.clear();
-    std::copy(validNumbers.begin(), validNumbers.end(), std::inserter(valid, valid.begin()));
+    std::vector<int> permutation(validNumbers.begin(), validNumbers.end());
+    std::random_shuffle(permutation.begin(), permutation.end());
+    std::copy(permutation.begin(), permutation.end(), std::inserter(valid, valid.begin()));
 }
 
 int Tracker::numValid() const
@@ -16,6 +18,11 @@ int Tracker::numValid() const
 int Tracker::oneValid() const
 {
     return *valid.begin();
+}
+
+int Tracker::otherValid() const
+{
+    return *++valid.begin();
 }
 
 const std::unordered_set<int>& Tracker::allValid() const
@@ -54,7 +61,17 @@ int Tracker::numValidAfterUpdate(int guess, const Response& response) const
     return cnt;
 }
 
-int Tracker::split(int guess) const
+Tracker Tracker::afterUpdate(int guess, const Response& response) const
+{
+    Tracker tracker;
+    for (int num : valid)
+    {
+        if (validCondition(num, guess, response)) tracker.valid.insert(num);
+    }
+    return tracker;
+}
+
+int Tracker::worstSplitSize(int guess) const
 {
     std::vector<int> cnts(validResponses.size());
     for (int number : valid)
@@ -62,4 +79,14 @@ int Tracker::split(int guess) const
         ++cnts[responseToIndex(findResponse(number, guess))];
     }
     return *std::max_element(cnts.begin(), cnts.end());
+}
+
+std::vector<Tracker> Tracker::split(int guess) const
+{
+    std::vector<Tracker> splits(validResponses.size());
+    for (int number : valid)
+    {
+        splits[responseToIndex(findResponse(number, guess))].valid.insert(number);
+    }
+    return splits;
 }

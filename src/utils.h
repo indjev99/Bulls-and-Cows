@@ -15,6 +15,7 @@ bool isResponseFinal(const Response& response);
 Response findResponse(int number, int guess);
 
 int randomNumber();
+int randomNumber(const std::vector<int>& validNumbers);
 void initRandomizer();
 
 #endif // UTIL_H_INCLUDED
