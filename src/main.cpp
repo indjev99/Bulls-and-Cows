@@ -42,9 +42,9 @@ static void userThink()
     single(guessers[difficulty - 1], &userThinker, -1);
 }
 
+const std::string help = "Possible commands: exit, help, guess, think.";
 void shell()
 {
-    std::string help = "Possible commands: exit, help, guess, think.";
     std::string command;
     std::cout << help << std::endl;
     while (true)
