@@ -20,12 +20,12 @@ int UserGuesser::makeGuess(int guess, Response response)
     else
     {
         int cnt = 0;
-        guess = 0;
-        while (!isNumberValid(guess) && cnt++ < 5)
+        do
         {
             std::cout << "What is your guess? ";
             std::cin >> guess;
         }
+        while (!isNumberValid(guess) && cnt++ < 5);
     }
     return guess;
 }

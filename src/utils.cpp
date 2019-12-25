@@ -41,19 +41,19 @@ static std::vector<int> findAllValidNumbers()
 }
 const std::vector<int> validNumbers = findAllValidNumbers();
 
-int numberToIndex(int number, const Response& response)
+int numberToIndex(int number)
 {
     return numberCodeMap[number - MIN_NUM];
 }
 
-bool isResponseValid(const Response& response)
+bool isResponseValid(Response response)
 {
     int b = response.bulls;
     int c = response.cows;
     return b >= 0 && c >= 0 && b + c <= DIGS && (b != DIGS - 1 || c != 1);
 }
 
-bool isResponseFinal(const Response& response)
+bool isResponseFinal(Response response)
 {
     return response.bulls == DIGS;
 }
@@ -103,7 +103,7 @@ static std::vector<Response> findAllValidResponses()
 }
 const std::vector<Response> validResponses = findAllValidResponses();
 
-int responseToIndex(const Response& response)
+int responseToIndex(Response response)
 {
     return responseCodeMap[response.bulls][response.cows];
 }

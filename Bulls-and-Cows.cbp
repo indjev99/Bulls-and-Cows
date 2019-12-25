@@ -21,6 +21,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="src/all_players.h" />
 		<Unit filename="src/dummy_guesser.cpp" />
 		<Unit filename="src/dummy_guesser.h" />
 		<Unit filename="src/fixed_thinker.cpp" />

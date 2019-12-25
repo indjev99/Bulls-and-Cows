@@ -6,12 +6,12 @@
 
 bool isNumberValid(int number);
 extern const std::vector<int> validNumbers;
-int numberToIndex(int number, const Response& response);
+int numberToIndex(int number);
 
-bool isResponseValid(const Response& response);
+bool isResponseValid(Response response);
 extern const std::vector<Response> validResponses;
-int responseToIndex(const Response& response);
-bool isResponseFinal(const Response& response);
+int responseToIndex(Response response);
+bool isResponseFinal(Response response);
 Response findResponse(int number, int guess);
 
 std::vector<int> findDigits(int number);

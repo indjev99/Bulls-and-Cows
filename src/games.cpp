@@ -69,7 +69,7 @@ void profile(Guesser* guesser, double timeLimit, int numIterations)
     }
 }
 
-void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames, int verbose)
+void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames, bool verbose)
 {
     double avgRes = 0;
     int maxRes = 0;
@@ -78,36 +78,34 @@ void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames,
         int result = playRound(guesser, thinker, timeLimit);
         avgRes += result;
         maxRes = std::max(maxRes, result);
-        if (verbose == 1) std::cout << result << " ";
-        else if (verbose == 2)
-        {
-            switch (result)
-            {
-            case G_FAIL:
-                std::cout << "Guesser failed!" << std::endl;
-                break;
-            case T_FAIL:
-                std::cout << "Thinker failed!" << std::endl;
-                break;
-            default:
-                std::cout << "Took " << result << " guesses!" << std::endl;
-            }
-            std::cout << std::endl;
-        }
+        if (verbose) std::cout << result << " ";
     }
     avgRes /= numGames;
-    if (verbose == 1) std::cout << std::endl;
+    if (verbose) std::cout << std::endl;
 
-    if (verbose == 0)
+    if (maxRes == G_FAIL)
     {
-        if (maxRes == G_FAIL)
-        {
-            std::cout << "Doesn't always guess correctly." << std::endl;
-        }
-        else
-        {
-            std::cout << "Average number of guesses needed: " << avgRes << std::endl;
-            std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
-        }
+        std::cout << "Doesn't always guess correctly." << std::endl;
+    }
+    else
+    {
+        std::cout << "Average number of guesses needed: " << avgRes << std::endl;
+        std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
+    }
+}
+
+void single(Guesser* guesser, Thinker* thinker, double timeLimit)
+{
+    int result = playRound(guesser, thinker, timeLimit);
+    switch (result)
+    {
+    case G_FAIL:
+        std::cout << "Guesser failed!" << std::endl;
+        break;
+    case T_FAIL:
+        std::cout << "Thinker failed!" << std::endl;
+        break;
+    default:
+        std::cout << "Took " << result << " guesses!" << std::endl;
     }
 }

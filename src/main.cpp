@@ -1,72 +1,61 @@
-#include "random_guesser.h"
-#include "dummy_guesser.h"
-#include "valid_guesser.h"
-#include "greedy_guesser.h"
-#include "lookahead_guesser.h"
-#include "user_guesser.h"
-#include "random_thinker.h"
-#include "valid_thinker.h"
-#include "greedy_thinker.h"
-#include "lookahead_thinker.h"
-#include "user_thinker.h"
-#include "games.h"
-#include "play.h"
 #include "utils.h"
+#include "games.h"
+#include "all_players.h"
 #include <iostream>
 
-DummyGuesser guesser1;
-ValidGuesser guesser2;
-GreedyGuesser guesser3;
-LookaheadGuesser guesser4;
-UserGuesser guesserU;
+RandomGuesser randomGuesser;
+DummyGuesser dummyGuesser;
+ValidGuesser validGuesser;
+GreedyGuesser greedyGuesser;
+LookaheadGuesser lookaheadGuesser;
+UserGuesser userGuesser;
 
-RandomThinker thinker1;
-ValidThinker thinker2;
-GreedyThinker thinker3;
-LookaheadThinker thinker4;
-UserThinker thinkerU;
+RandomThinker randomThinker;
+ValidThinker validThinker;
+GreedyThinker greedyThinker;
+LookaheadThinker lookaheadThinker;
+UserThinker userThinker;
 
-std::vector<Guesser*> guessers = {&guesser1, &guesser2, &guesser3, &guesser4};
-std::vector<Thinker*> thinkers = {&thinker1, &thinker2, &thinker3, &thinker4};
+static std::vector<Guesser*> guessers = {&dummyGuesser, &validGuesser, &greedyGuesser, &lookaheadGuesser};
+static std::vector<Thinker*> thinkers = {&randomThinker, &validThinker, &greedyThinker, &lookaheadThinker};
 
-void userGuess()
+static int selectDifficulty(int maxDifficulty)
 {
-    int diff = 0;
-    while (diff < 1 || diff > 4)
+    int difficulty = 0;
+    while (difficulty < 1 || difficulty > maxDifficulty)
     {
-        std::cout << "Select difficulty (1 - 4): ";
-        std::cin >> diff;
+        std::cout << "Select difficulty (1 - " << maxDifficulty << "): ";
+        std::cin >> difficulty;
     }
-    profile(&guesserU, thinkers[diff - 1], -1, 1, 2);
+    return difficulty;
 }
 
-void userThink()
+static void userGuess()
 {
-    int diff = 0;
-    while (diff < 1 || diff > 4)
-    {
-        std::cout << "Select difficulty (1 - 4): ";
-        std::cin >> diff;
-    }
-    profile(guessers[diff], &thinkerU, -1, 1, 2);
+    int difficulty = selectDifficulty(thinkers.size());
+    single(&userGuesser, thinkers[difficulty - 1], -1);
+}
+
+static void userThink()
+{
+    int difficulty = selectDifficulty(guessers.size());
+    single(guessers[difficulty - 1], &userThinker, -1);
 }
 
 void shell()
 {
-    char choice = ' ';
+    std::string help = "Possible commands: exit, help, guess, think.";
+    std::string command;
+    std::cout << help << std::endl;
     while (true)
     {
-        std::cout << "Do you want to guess or think (g / t)? ";
-        std::cin >> choice;
-        switch (choice)
-        {
-        case 'g':
-            userGuess();
-            break;
-        case 't':
-            userThink();
-            break;
-        }
+        std::cout << std::endl;
+        std::cout << "Enter command: ";
+        std::cin >> command;
+        if (command == "exit") break;
+        else if (command == "help") std::cout << help << std::endl;
+        else if (command == "guess") userGuess();
+        else if (command == "think") userThink();
     }
 }
 
@@ -75,8 +64,6 @@ int main()
     initRandomizer();
 
     shell();
-
-    //battle(&guesser4, &thinker3, &guesser3, &thinker3, 30, 1000, true);
 
     return 0;
 }

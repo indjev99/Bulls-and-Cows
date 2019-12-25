@@ -1,13 +1,8 @@
 #include "lookahead_guesser.h"
 #include "utils.h"
 
-#include <iostream>
-using namespace std;
-
 int LookaheadGuesser::decideGuess() const
 {
-    //if (turn == 1) cerr << endl;
-
     if (turn == 1 || turn >= 3)
     {
         int bestValue = vtracker.numValid();
@@ -21,7 +16,6 @@ int LookaheadGuesser::decideGuess() const
                 bestGuess = guess;
             }
         }
-        //cerr << turn << ". " << vtracker.numValid() << " = " << bestValue << endl;
         return bestGuess;
     }
 
@@ -54,6 +48,5 @@ int LookaheadGuesser::decideGuess() const
             bestGuess = guess;
         }
     }
-    //cerr << turn << ". " << vtracker.numValid() << " = " << bestValue.second << " " << bestValue.first << endl;
     return bestGuess;
 }

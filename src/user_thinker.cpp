@@ -1,4 +1,5 @@
 #include "user_thinker.h"
+#include "utils.h"
 #include <iostream>
 
 void UserThinker::reset()
@@ -10,7 +11,12 @@ Response UserThinker::getResponse(int guess)
 {
     Response response;
     std::cout << "Opponent guesses " << guess << "." << std::endl;
-    std::cout << "What is your response (bulls cows)? ";
-    std::cin >> response.bulls >> response.cows;
+    int cnt = 0;
+    do
+    {
+        std::cout << "What is your response (bulls cows)? ";
+        std::cin >> response.bulls >> response.cows;
+    }
+    while (!isResponseValid(response) && cnt++ < 5);
     return response;
 }
