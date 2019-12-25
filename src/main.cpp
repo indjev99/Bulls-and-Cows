@@ -42,7 +42,8 @@ static void userThink()
     single(guessers[difficulty - 1], &userThinker, -1);
 }
 
-const std::string help = "Possible commands: exit, help, guess, think.";
+const std::string help = "Possible commands: guess, think, credits, help, exit.";
+const std::string credits = "Made by Emil Indzhev.";
 void shell()
 {
     std::string command;
@@ -52,10 +53,11 @@ void shell()
         std::cout << std::endl;
         std::cout << "Enter command: ";
         std::cin >> command;
-        if (command == "exit") break;
-        else if (command == "help") std::cout << help << std::endl;
-        else if (command == "guess") userGuess();
+        if (command == "guess") userGuess();
         else if (command == "think") userThink();
+        else if (command == "help") std::cout << help << std::endl;
+        else if (command == "credits") std::cout << credits << std::endl;
+        else if (command == "exit") break;
     }
 }
 
