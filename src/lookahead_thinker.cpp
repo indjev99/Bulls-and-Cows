@@ -1,15 +1,15 @@
 #include "lookahead_thinker.h"
 #include "utils.h"
 
-Response LookaheadThinker::decideResponse(int guess)
+Response LookaheadThinker::decideResponse(int guess) const
 {
     std::pair<int, int> bestValue = {0, 0};
     Response bestResponse;
     for (const Response& response : validResponses)
     {
-        Tracker currTracker = tracker.afterUpdate(guess, response);
+        ValidTracker currTracker = vtracker.afterUpdate(guess, response);
         std::pair<int, int> value = {currTracker.numValid(), currTracker.numValid()};
-        for (int guess : currTracker.allValid())
+        for (int guess : stracker.reduce(validNumbers))
         {
             int currValue = currTracker.worstSplitSize(guess);
             value.first = std::min(value.first, currValue);

@@ -2,22 +2,20 @@
 #define TRACKER_GUESSER_H_INCLUDED
 
 #include "guesser.h"
-#include "tracker.h"
+#include "valid_tracker.h"
+#include "symmetry_tracker.h"
 
 struct TrackerGuesser : Guesser
 {
     void reset() final;
-    int makeGuess(int guess, const Response& response) final;
+    int makeGuess(int guess, Response response) final;
 
 protected:
-    const int& turn = _turn;
-    const Tracker& tracker = _tracker;
+    int turn;
+    ValidTracker vtracker;
+    SymmetryTracker stracker;
 
-    virtual int decideGuess() =0;
-
-private:
-    int _turn;
-    Tracker _tracker;
+    virtual int decideGuess() const =0;
 };
 
 #endif // TRACKER_GUESSER_H_INCLUDED

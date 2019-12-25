@@ -6,7 +6,7 @@
 struct LookaheadThinker final : TrackerThinker
 {
 protected:
-    Response decideResponse(int guess) override;
+    Response decideResponse(int guess) const override;
 };
 
 #endif // LOOKAHEAD_THINKER_H_INCLUDED

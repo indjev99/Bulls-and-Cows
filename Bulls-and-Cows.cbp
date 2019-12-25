@@ -46,19 +46,25 @@
 		<Unit filename="src/random_thinker.cpp" />
 		<Unit filename="src/random_thinker.h" />
 		<Unit filename="src/response.h" />
+		<Unit filename="src/symmetry_tracker.cpp" />
+		<Unit filename="src/symmetry_tracker.h" />
 		<Unit filename="src/thinker.h" />
-		<Unit filename="src/tracker.cpp" />
-		<Unit filename="src/tracker.h" />
 		<Unit filename="src/tracker_guesser.h" />
 		<Unit filename="src/tracker_guessert.cpp" />
 		<Unit filename="src/tracker_thinker.cpp" />
 		<Unit filename="src/tracker_thinker.h" />
+		<Unit filename="src/user_guesser.cpp" />
+		<Unit filename="src/user_guesser.h" />
+		<Unit filename="src/user_thinker.cpp" />
+		<Unit filename="src/user_thinker.h" />
 		<Unit filename="src/utils.cpp" />
 		<Unit filename="src/utils.h" />
 		<Unit filename="src/valid_guesser.cpp" />
 		<Unit filename="src/valid_guesser.h" />
 		<Unit filename="src/valid_thinker.cpp" />
 		<Unit filename="src/valid_thinker.h" />
+		<Unit filename="src/valid_tracker.cpp" />
+		<Unit filename="src/valid_tracker.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

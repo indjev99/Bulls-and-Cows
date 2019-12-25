@@ -14,8 +14,11 @@ int responseToIndex(const Response& response);
 bool isResponseFinal(const Response& response);
 Response findResponse(int number, int guess);
 
+std::vector<int> findDigits(int number);
+int findNumber(const std::vector<int>& digits);
+extern const std::vector<int> validDigits;
+
 int randomNumber();
-int randomNumber(const std::vector<int>& validNumbers);
 void initRandomizer();
 
 #endif // UTIL_H_INCLUDED

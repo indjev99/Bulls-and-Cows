@@ -6,7 +6,7 @@
 struct GreedyGuesser final : TrackerGuesser
 {
 protected:
-    int decideGuess() override;
+    int decideGuess() const override;
 };
 
 #endif // GREEDY_GUESSER_H_INCLUDED

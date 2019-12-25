@@ -1,6 +1,6 @@
 #include "play.h"
 #include "utils.h"
-#include "tracker.h"
+#include "valid_tracker.h"
 #include <chrono>
 
 struct Timer
@@ -38,7 +38,7 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
     int numGuesses = 0;
     int guess = 0;
     Response response = {0, 0};
-    Tracker tracker;
+    ValidTracker tracker;
     tracker.reset();
     while (!isResponseFinal(response) && numGuesses < maxGuesses)
     {
@@ -47,14 +47,15 @@ int playRound(Guesser* guesser, Thinker* thinker, double timeLimit, int maxGuess
         gTimer.start();
         guess = guesser->makeGuess(guess, response);
         gTimer.stop();
-        if (!isNumberValid(guess) || gTimer.time > timeLimit) return G_FAIL;
+        if (!isNumberValid(guess) || (gTimer.time > timeLimit && timeLimit > 0)) return G_FAIL;
 
         tTimer.start();
         response = thinker->getResponse(guess);
         tTimer.stop();
         tracker.update(guess, response);
-        if (!isResponseValid(response) || tracker.numValid() == 0 || tTimer.time > timeLimit) return T_FAIL;
+        if (!isResponseValid(response) || tracker.numValid() == 0 || (tTimer.time > timeLimit && timeLimit > 0)) return T_FAIL;
     }
+    guesser->makeGuess(guess, response);
     if (!isResponseFinal(response)) return G_FAIL;
     return numGuesses;
 }

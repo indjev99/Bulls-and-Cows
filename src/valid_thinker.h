@@ -6,7 +6,7 @@
 struct ValidThinker final : TrackerThinker
 {
 protected:
-    Response decideResponse(int guess) override;
+    Response decideResponse(int guess) const override;
 };
 
 #endif // VALID_THINKER_H_INCLUDED

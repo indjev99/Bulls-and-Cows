@@ -108,12 +108,39 @@ int responseToIndex(const Response& response)
     return responseCodeMap[response.bulls][response.cows];
 }
 
-int randomNumber()
+std::vector<int> findDigits(int number)
 {
-    return randomNumber(validNumbers);
+    std::vector<int> digits;
+    for (int i = 0; i < DIGS; ++i)
+    {
+        digits.push_back(number % BASE);
+        number /= BASE;
+    }
+    return digits;
 }
 
-int randomNumber(const std::vector<int>& validNumbers)
+int findNumber(const std::vector<int>& digits)
+{
+    int number = 0;
+    for (int i = DIGS - 1; i >= 0; --i)
+    {
+        number = number * BASE + digits[i];
+    }
+    return number;
+}
+
+static std::vector<int> findAllValidDigits()
+{
+    std::vector<int> validDigits;
+    for (int i = 0; i < BASE; ++i)
+    {
+        validDigits.push_back(i);
+    }
+    return validDigits;
+}
+const std::vector<int> validDigits = findAllValidDigits();
+
+int randomNumber()
 {
     int rng = rand() * (RAND_MAX + 1) + rand();
     return validNumbers[rng % validNumbers.size()];

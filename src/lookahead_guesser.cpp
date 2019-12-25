@@ -1,48 +1,59 @@
 #include "lookahead_guesser.h"
+#include "utils.h"
 
-int LookaheadGuesser::decideGuess()
+#include <iostream>
+using namespace std;
+
+int LookaheadGuesser::decideGuess() const
 {
-    if (turn == 1) return tracker.oneValid();
+    //if (turn == 1) cerr << endl;
 
-    if (turn == 2)
+    if (turn == 1 || turn >= 3)
     {
-        int bestValue = tracker.numValid();
+        int bestValue = vtracker.numValid();
         int bestGuess = 0;
-        for (int guess : tracker.allValid())
+        for (int guess : stracker.reduce(validNumbers))
         {
-            int value = tracker.worstSplitSize(guess);
+            int value = vtracker.worstSplitSize(guess);
             if (value < bestValue)
             {
                 bestValue = value;
                 bestGuess = guess;
             }
         }
+        //cerr << turn << ". " << vtracker.numValid() << " = " << bestValue << endl;
         return bestGuess;
     }
 
-    std::pair<int, int> bestValue = {tracker.numValid(), tracker.numValid()};
+    std::pair<int, int> bestValue = {vtracker.numValid(), vtracker.numValid()};
     int bestGuess = 0;
-    for (int guess : tracker.allValid())
+    for (int guess : stracker.reduce(validNumbers))
     {
         std::pair<int, int> value = {0, 0};
-        std::vector<Tracker> splits = tracker.split(guess);
-        for (const Tracker& currTracker : splits)
+        value.first = vtracker.worstSplitSize(guess);
+
+        std::vector<ValidTracker> splits = vtracker.split(guess);
+        SymmetryTracker currStracker = stracker.afterUpdate(guess);
+        for (const ValidTracker& currTracker : splits)
         {
             int currBestValue = currTracker.numValid();
-            for (int guess : currTracker.allValid())
+            for (int i = 0; i < 100; ++i)
             {
-                int currValue = currTracker.worstSplitSize(guess);
+                int currGuess = randomNumber();
+                int currValue = currTracker.worstSplitSize(currGuess);
                 currBestValue = std::min(currBestValue, currValue);
             }
-            value.first = std::max(value.first, currBestValue);
-            value.second =  std::max(value.second, currTracker.numValid());
+            value.second = std::max(value.second, currBestValue);
         }
+
+        std::swap(value.first, value.second);
+
         if (value < bestValue)
         {
             bestValue = value;
             bestGuess = guess;
         }
     }
-
+    //cerr << turn << ". " << vtracker.numValid() << " = " << bestValue.second << " " << bestValue.first << endl;
     return bestGuess;
 }

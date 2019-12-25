@@ -51,7 +51,6 @@ void profile(Guesser* guesser, double timeLimit, int numIterations)
             int result = playRound(guesser, &thinker, timeLimit);
             avgRes += result;
             maxRes = std::max(maxRes, result);
-            //std::cerr << number << " : " << result << std::endl;
         }
         if (cnt % 100 == 0) std::cout << ".";
         ++cnt;
@@ -70,7 +69,7 @@ void profile(Guesser* guesser, double timeLimit, int numIterations)
     }
 }
 
-void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames)
+void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames, int verbose)
 {
     double avgRes = 0;
     int maxRes = 0;
@@ -79,18 +78,36 @@ void profile(Guesser* guesser, Thinker* thinker, double timeLimit, int numGames)
         int result = playRound(guesser, thinker, timeLimit);
         avgRes += result;
         maxRes = std::max(maxRes, result);
-        std::cerr << result << " ";
+        if (verbose == 1) std::cout << result << " ";
+        else if (verbose == 2)
+        {
+            switch (result)
+            {
+            case G_FAIL:
+                std::cout << "Guesser failed!" << std::endl;
+                break;
+            case T_FAIL:
+                std::cout << "Thinker failed!" << std::endl;
+                break;
+            default:
+                std::cout << "Took " << result << " guesses!" << std::endl;
+            }
+            std::cout << std::endl;
+        }
     }
     avgRes /= numGames;
-    std::cerr << std::endl;
+    if (verbose == 1) std::cout << std::endl;
 
-    if (maxRes == G_FAIL)
+    if (verbose == 0)
     {
-        std::cout << "Doesn't always guess correctly." << std::endl;
-    }
-    else
-    {
-        std::cout << "Average number of guesses needed: " << avgRes << std::endl;
-        std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
+        if (maxRes == G_FAIL)
+        {
+            std::cout << "Doesn't always guess correctly." << std::endl;
+        }
+        else
+        {
+            std::cout << "Average number of guesses needed: " << avgRes << std::endl;
+            std::cout << "Maximum number of guesses needed: " << maxRes << std::endl;
+        }
     }
 }

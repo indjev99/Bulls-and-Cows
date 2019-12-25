@@ -1,9 +1,9 @@
 #include "valid_thinker.h"
 #include "utils.h"
 
-Response ValidThinker::decideResponse(int guess)
+Response ValidThinker::decideResponse(int guess) const
 {
-    int number = tracker.oneValid();
-    if (number == guess && tracker.numValid() > 1) number = tracker.otherValid();
+    int number = vtracker.oneValid();
+    if (number == guess && vtracker.numValid() > 1) number = vtracker.otherValid();
     return findResponse(number, guess);
 }

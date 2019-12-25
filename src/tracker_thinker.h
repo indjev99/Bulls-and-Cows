@@ -2,7 +2,8 @@
 #define TRACKER_THINKER_H_INCLUDED
 
 #include "thinker.h"
-#include "tracker.h"
+#include "valid_tracker.h"
+#include "symmetry_tracker.h"
 
 struct TrackerThinker : Thinker
 {
@@ -10,14 +11,11 @@ struct TrackerThinker : Thinker
     Response getResponse(int guess) final;
 
 protected:
-    const int& turn = _turn;
-    const Tracker& tracker = _tracker;
+    int turn;
+    ValidTracker vtracker;
+    SymmetryTracker stracker;
 
-    virtual Response decideResponse(int guess) =0;
-
-private:
-    int _turn;
-    Tracker _tracker;
+    virtual Response decideResponse(int guess) const =0;
 };
 
 #endif // TRACKER_THINKER_H_INCLUDED

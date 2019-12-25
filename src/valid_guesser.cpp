@@ -1,6 +1,6 @@
 #include "valid_guesser.h"
 
-int ValidGuesser::decideGuess()
+int ValidGuesser::decideGuess() const
 {
-    return tracker.oneValid();
+    return vtracker.oneValid();
 }

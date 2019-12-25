@@ -1,20 +1,18 @@
 #include "greedy_guesser.h"
+#include "utils.h"
 
-int GreedyGuesser::decideGuess()
+int GreedyGuesser::decideGuess() const
 {
-    if (turn == 1) return tracker.oneValid();
-
-    int bestValue = tracker.numValid();
+    int bestValue = vtracker.numValid();
     int bestGuess = 0;
-    for (int guess : tracker.allValid())
+    for (int guess : stracker.reduce(validNumbers))
     {
-        int value = tracker.worstSplitSize(guess);
+        int value = vtracker.worstSplitSize(guess);
         if (value < bestValue)
         {
             bestValue = value;
             bestGuess = guess;
         }
     }
-
     return bestGuess;
 }

@@ -6,7 +6,7 @@
 struct GreedyThinker final : TrackerThinker
 {
 protected:
-    Response decideResponse(int guess) override;
+    Response decideResponse(int guess) const override;
 };
 
 #endif // GREEDY_THINKER_H_INCLUDED
