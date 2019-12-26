@@ -19,7 +19,7 @@ struct ValidTracker
     int worstSplitSize(int guess) const;
     std::vector<ValidTracker> split(int guess) const;
 
-protected:
+private:
     std::unordered_set<int> valid;
 };
 

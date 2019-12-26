@@ -38,6 +38,7 @@
 		<Unit filename="src/lookahead_thinker.cpp" />
 		<Unit filename="src/lookahead_thinker.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/mcts_node.h" />
 		<Unit filename="src/number_range.h" />
 		<Unit filename="src/params.h" />
 		<Unit filename="src/play.cpp" />
@@ -50,8 +51,8 @@
 		<Unit filename="src/symmetry_tracker.cpp" />
 		<Unit filename="src/symmetry_tracker.h" />
 		<Unit filename="src/thinker.h" />
+		<Unit filename="src/tracker_guesser.cpp" />
 		<Unit filename="src/tracker_guesser.h" />
-		<Unit filename="src/tracker_guessert.cpp" />
 		<Unit filename="src/tracker_thinker.cpp" />
 		<Unit filename="src/tracker_thinker.h" />
 		<Unit filename="src/user_guesser.cpp" />

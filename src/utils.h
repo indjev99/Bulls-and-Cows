@@ -18,6 +18,8 @@ std::vector<int> findDigits(int number);
 int findNumber(const std::vector<int>& digits);
 extern const std::vector<int> validDigits;
 
+extern const std::vector<int> validPos;
+
 int randomNumber();
 void initRandomizer();
 

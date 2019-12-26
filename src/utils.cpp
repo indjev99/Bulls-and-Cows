@@ -2,6 +2,7 @@
 #include "params.h"
 #include "number_range.h"
 #include <unordered_map>
+#include <algorithm>
 #include <stdlib.h>
 #include <time.h>
 
@@ -13,11 +14,11 @@ bool isNumberValid(int number)
     {
         used[i] = false;
     }
-    for (int i = 0; i < DIGS; ++i)
+    for (int i = 0; i < NUM_DIGS; ++i)
     {
         int dig = number % BASE;
         number /= BASE;
-        if (dig == 0 && i == DIGS - 1) return false;
+        if (dig == 0 && i == NUM_DIGS - 1) return false;
         if (used[dig]) return false;
         used[dig] = true;
     }
@@ -50,23 +51,23 @@ bool isResponseValid(Response response)
 {
     int b = response.bulls;
     int c = response.cows;
-    return b >= 0 && c >= 0 && b + c <= DIGS && (b != DIGS - 1 || c != 1);
+    return b >= 0 && c >= 0 && b + c <= NUM_DIGS && (b != NUM_DIGS - 1 || c != 1);
 }
 
 bool isResponseFinal(Response response)
 {
-    return response.bulls == DIGS;
+    return response.bulls == NUM_DIGS;
 }
 
 Response findResponse(int number, int guess)
 {
     bool used[BASE];
-    int digs[DIGS];
+    int digs[NUM_DIGS];
     for (int i = 0; i < BASE; ++i)
     {
         used[i] = false;
     }
-    for (int i = 0; i < DIGS; ++i)
+    for (int i = 0; i < NUM_DIGS; ++i)
     {
         int dig = number % BASE;
         number /= BASE;
@@ -75,7 +76,7 @@ Response findResponse(int number, int guess)
     }
     int bulls = 0;
     int cows = 0;
-    for (int i = 0; i < DIGS; ++i)
+    for (int i = 0; i < NUM_DIGS; ++i)
     {
         int dig = guess % BASE;
         guess /= BASE;
@@ -85,14 +86,14 @@ Response findResponse(int number, int guess)
     return {bulls, cows};
 }
 
-static int responseCodeMap[DIGS + 1][DIGS + 1];
+static int responseCodeMap[NUM_DIGS + 1][NUM_DIGS + 1];
 static std::vector<Response> findAllValidResponses()
 {
     std::vector<Response> validResponses;
-    for (int i = 0; i < (DIGS + 1) * (DIGS + 1); ++i)
+    for (int i = 0; i < (NUM_DIGS + 1) * (NUM_DIGS + 1); ++i)
     {
-        int bulls = i / (DIGS + 1);
-        int cows = i % (DIGS + 1);
+        int bulls = i / (NUM_DIGS + 1);
+        int cows = i % (NUM_DIGS + 1);
         if (isResponseValid({bulls, cows}))
         {
             responseCodeMap[bulls][cows] = validResponses.size();
@@ -111,18 +112,19 @@ int responseToIndex(Response response)
 std::vector<int> findDigits(int number)
 {
     std::vector<int> digits;
-    for (int i = 0; i < DIGS; ++i)
+    for (int i = 0; i < NUM_DIGS; ++i)
     {
         digits.push_back(number % BASE);
         number /= BASE;
     }
+    std::reverse(digits.begin(), digits.end());
     return digits;
 }
 
 int findNumber(const std::vector<int>& digits)
 {
     int number = 0;
-    for (int i = DIGS - 1; i >= 0; --i)
+    for (int i = 0; i < NUM_DIGS; ++i)
     {
         number = number * BASE + digits[i];
     }
@@ -139,6 +141,17 @@ static std::vector<int> findAllValidDigits()
     return validDigits;
 }
 const std::vector<int> validDigits = findAllValidDigits();
+
+static std::vector<int> findAllValidPos()
+{
+    std::vector<int> validPos;
+    for (int i = 0; i < NUM_DIGS; ++i)
+    {
+        validPos.push_back(i);
+    }
+    return validPos;
+}
+const std::vector<int> validPos = findAllValidPos();
 
 int randomNumber()
 {
