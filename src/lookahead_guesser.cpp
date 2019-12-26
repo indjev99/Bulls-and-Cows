@@ -3,7 +3,7 @@
 
 int LookaheadGuesser::decideGuess() const
 {
-    if (turn == 1 || turn >= 3)
+    if (turn >= 3)
     {
         int bestValue = vtracker.numValid();
         int bestGuess = 0;
@@ -30,7 +30,7 @@ int LookaheadGuesser::decideGuess() const
         {
             int currBestValue = currTracker.numValid();
             value.second = std::max(value.second, currBestValue);
-            for (int i = 0; i < 25; ++i)
+            for (int i = 0; i < 100; ++i)
             {
                 int currGuess = randomNumber();
                 int currValue = currTracker.worstSplitSize(currGuess);
