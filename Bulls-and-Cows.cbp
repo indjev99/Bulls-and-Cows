@@ -38,7 +38,8 @@
 		<Unit filename="src/lookahead_thinker.cpp" />
 		<Unit filename="src/lookahead_thinker.h" />
 		<Unit filename="src/main.cpp" />
-		<Unit filename="src/mcts_node.h" />
+		<Unit filename="src/mcts.cpp" />
+		<Unit filename="src/mcts.h" />
 		<Unit filename="src/number_range.h" />
 		<Unit filename="src/params.h" />
 		<Unit filename="src/play.cpp" />

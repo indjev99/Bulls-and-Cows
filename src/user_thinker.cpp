@@ -17,6 +17,6 @@ Response UserThinker::getResponse(int guess)
         std::cout << "What is your response (bulls cows)? ";
         std::cin >> response.bulls >> response.cows;
     }
-    while (!isResponseValid(response) && cnt++ < 5);
+    while (!isResponseValid(response) && ++cnt < 5);
     return response;
 }

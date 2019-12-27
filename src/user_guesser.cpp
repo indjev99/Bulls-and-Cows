@@ -25,7 +25,7 @@ int UserGuesser::makeGuess(int guess, Response response)
             std::cout << "What is your guess? ";
             std::cin >> guess;
         }
-        while (!isNumberValid(guess) && cnt++ < 5);
+        while (!isNumberValid(guess) && ++cnt < 5);
     }
     return guess;
 }

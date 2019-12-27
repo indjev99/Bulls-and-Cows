@@ -70,7 +70,7 @@ bool SymmetryTracker::isUnique(int number) const
     std::vector<int> digits = findDigits(number);
     if (!checkOrder(digits, unasked)) return false;
 
-    if (turn == 0) return isUniqueTurn1(number, digits);
+    if (turn == 0) return isUniqueTurn0(number, digits);
     else if (turn == 1) return isUniqueTurn1(number, digits);
 
     return true;
@@ -79,9 +79,10 @@ bool SymmetryTracker::isUnique(int number) const
 bool SymmetryTracker::isUniqueTurn0(int number, const std::vector<int> digits) const
 {
     int pos = 0;
+    int last = digits.size() - 1;
     for (int digit : digits)
     {
-        if (digit == 0 && pos != 1) return false;
+        if (digit == 0 && pos != last) return false;
         ++pos;
     }
     return true;
