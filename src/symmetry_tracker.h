@@ -20,8 +20,8 @@ private:
     std::vector<int> firstDigs;
     std::vector<int> firstPos;
 
-    bool isUniqueTurn0(int number, const std::vector<int> digits) const;
-    bool isUniqueTurn1(int number, const std::vector<int> digits) const;
+    bool isUniqueTurn0(const std::vector<int> digits) const;
+    bool isUniqueTurn1(const std::vector<int> digits) const;
 };
 
 #endif // SYMMETRY_TRACKER_H_INCLUDED

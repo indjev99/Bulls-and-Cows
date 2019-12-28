@@ -3,7 +3,7 @@
 
 int LookaheadGuesser::decideGuess() const
 {
-    if (turn >= 3)
+    if (turn == 1 || turn >= 3)
     {
         int bestValue = vtracker.numValid();
         int bestGuess = 0;

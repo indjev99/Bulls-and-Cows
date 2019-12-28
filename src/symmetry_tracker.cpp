@@ -65,18 +65,21 @@ static bool checkOrder(const std::vector<int>& elems, const std::unordered_set<i
     return true;
 }
 
+static int num;
+
 bool SymmetryTracker::isUnique(int number) const
 {
+    num = number;
     std::vector<int> digits = findDigits(number);
     if (!checkOrder(digits, unasked)) return false;
 
-    if (turn == 0) return isUniqueTurn0(number, digits);
-    else if (turn == 1) return isUniqueTurn1(number, digits);
+    if (turn == 0) return isUniqueTurn0(digits);
+    else if (turn == 1) return isUniqueTurn1(digits);
 
     return true;
 }
 
-bool SymmetryTracker::isUniqueTurn0(int number, const std::vector<int> digits) const
+bool SymmetryTracker::isUniqueTurn0(const std::vector<int> digits) const
 {
     int pos = 0;
     int last = digits.size() - 1;
@@ -88,11 +91,8 @@ bool SymmetryTracker::isUniqueTurn0(int number, const std::vector<int> digits) c
     return true;
 }
 
-bool SymmetryTracker::isUniqueTurn1(int number, const std::vector<int> digits) const
+bool SymmetryTracker::isUniqueTurn1(const std::vector<int> digits) const
 {
-    int startDig = digits[0];
-    if (std::find(firstDigs.begin() + 1, firstDigs.end(), startDig) != firstDigs.end() && startDig != firstDigs[1]) return false;
-
     int pos = 0;
     int lastFdig = 0;
     int numFdig = 0;
@@ -100,6 +100,9 @@ bool SymmetryTracker::isUniqueTurn1(int number, const std::vector<int> digits) c
     std::unordered_set<int> simplePos(validPos.begin(), validPos.end());
     simplePos.erase(0);
     simplePos.erase(zeroPos);
+    std::vector<int> specialDigs = {digits[0]};
+    if (zeroPos >=0) specialDigs.push_back(digits[zeroPos]);
+    bool bullFound = false;
     for (int digit : digits)
     {
         if (digit == 0) currPos[digit] = pos;
@@ -115,6 +118,11 @@ bool SymmetryTracker::isUniqueTurn1(int number, const std::vector<int> digits) c
                 {
                     lastFdig = std::max(lastFdig, dist);
                     ++numFdig;
+                    if (!bullFound && firstPos[dist] == pos)
+                    {
+                        bullFound = true;
+                        specialDigs.push_back(digit);
+                    }
                 }
             }
         }
@@ -128,8 +136,15 @@ bool SymmetryTracker::isUniqueTurn1(int number, const std::vector<int> digits) c
     {
         if (currPos.find(digit) != currPos.end()) allPos.push_back(currPos[digit]);
     }
-
     if (!checkOrder(allPos, simplePos)) return false;
+
+    std::vector<int>::const_iterator it = firstDigs.begin() + 1;
+    int cnt = 0;
+    for (int elem : specialDigs)
+    {
+        if (std::find(firstDigs.begin() + 1, firstDigs.end(), elem) != firstDigs.end()) ++cnt;
+        if (std::find(firstDigs.begin() + 1, firstDigs.end(), elem) != firstDigs.end() && elem != *it++) return false;
+    }
 
     return true;
 }

@@ -45,4 +45,6 @@ private:
     double evaluate(const ValidTracker& tracker);
 };
 
+void testMcts();
+
 #endif // MCTS_H_INCLUDED

@@ -4,9 +4,6 @@
 #include <math.h>
 #include <assert.h>
 
-#include <iostream>
-using namespace std;
-
 static const double c_init = 1.25;
 static const double base_turns = 7;
 static const double log_scale = log(pow(validNumbers.size(), 1 / (base_turns - 1)));
@@ -80,7 +77,6 @@ int Node::getGuess()
 {
     assert(guesserToPlay);
     Node child = selectMove();
-    //cerr << "evals: " << child.visitCount << " " << child.value() << endl;
     int guess = child.guess;
     *this = child;
     return guess;
@@ -90,7 +86,6 @@ Response Node::getResponse()
 {
     assert(!guesserToPlay);
     Node child = selectMove();
-    //cerr << "evals: " << child.visitCount << " " << child.value() << endl;
     Response response = child.response;
     *this = child;
     return response;
@@ -146,22 +141,12 @@ void Node::mctsIteration(ValidTracker tracker)
     std::vector<Node*> history = {nodePtr};
     int lastGuess = nodePtr->guess;
 
-    //cerr << "state: " << nodePtr->turns << " " << nodePtr->terminal << " = " << tracker.numValid();
-    //if (!nodePtr->guesserToPlay) cerr << "\nthinker " << nodePtr->guess;
-    //else cerr << "\nguesser " << nodePtr->response.bulls << " " << nodePtr->response.cows;
-    //cerr << "\nstats: " << nodePtr->prior << " " << nodePtr->value() << " " << nodePtr->visitCount << "\n";
-
     while (!nodePtr->children.empty())
     {
         nodePtr = nodePtr->selectChild();
         if (!nodePtr->guesserToPlay) lastGuess = nodePtr->guess;
         else tracker.update(lastGuess, nodePtr->response);
         history.push_back(nodePtr);
-
-        //cerr << "state: " << nodePtr->turns << " " << nodePtr->terminal << " = " << tracker.numValid();
-        //if (!nodePtr->guesserToPlay) cerr << "\nthinker " << nodePtr->guess;
-        //else cerr << "\nguesser " << nodePtr->response.bulls << " " << nodePtr->response.cows;
-        //cerr << "\nstats: " << nodePtr->prior << " " << nodePtr->value() << " " << nodePtr->visitCount << "\n";
     }
     double value = nodePtr->evaluate(tracker);
     for (Node* nodePtr : history)
@@ -176,8 +161,34 @@ void Node::mcts(const ValidTracker& tracker, int numIters)
 {
     for (int i = 0; i < numIters; ++i)
     {
-        //if (i % 100 == 0) cerr << i << endl;
         mctsIteration(tracker);
     }
-    //cerr << endl;
+}
+
+#include <iostream>
+
+void testMcts()
+{
+    ValidTracker tracker;
+
+    while (true)
+    {
+        Node node;
+        tracker.reset();
+
+        while (true)
+        {
+            node.mcts(tracker, 2500);
+            int guess = node.getGuess();
+            std::cerr << guess << std::endl;
+
+            node.mcts(tracker, 2500);
+            Response response = node.getResponse();
+            std::cerr << response.bulls << " " << response.cows << std::endl;
+
+            tracker.update(guess, response);
+
+            if (isResponseFinal(response)) break;
+        }
+    }
 }

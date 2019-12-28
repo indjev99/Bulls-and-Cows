@@ -60,36 +60,11 @@ void shell()
     }
 }
 
-//#include "mcts.h"
-
 int main()
 {
     initRandomizer();
 
     shell();
-
-    /*ValidTracker tracker;
-
-    while (true)
-    {
-        Node node;
-        tracker.reset();
-
-        while (true)
-        {
-            node.mcts(tracker, 2500);
-            int guess = node.getGuess();
-            std::cerr << guess << std::endl;
-
-            node.mcts(tracker, 2500);
-            Response response = node.getResponse();
-            std::cerr << response.bulls << " " << response.cows << std::endl;
-
-            tracker.update(guess, response);
-
-            if (isResponseFinal(response)) break;
-        }
-    }*/
 
     return 0;
 }
