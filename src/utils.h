@@ -5,22 +5,25 @@
 #include <vector>
 
 bool isNumberValid(int number);
-extern const std::vector<int> validNumbers;
 int numberToIndex(int number);
 
 bool isResponseValid(Response response);
-extern const std::vector<Response> validResponses;
-int responseToIndex(Response response);
 bool isResponseFinal(Response response);
 Response findResponse(int number, int guess);
 
 std::vector<int> findDigits(int number);
 int findNumber(const std::vector<int>& digits);
-extern const std::vector<int> validDigits;
 
-extern const std::vector<int> validPos;
+extern std::vector<int> validNumbers;
+extern std::vector<Response> validResponses;
+extern std::vector<int> validDigits;
+extern std::vector<int> validPos;
+
+int responseToIndex(Response response);
 
 int randomNumber();
 void initRandomizer();
+
+void setParams(int numDigits);
 
 #endif // UTIL_H_INCLUDED
