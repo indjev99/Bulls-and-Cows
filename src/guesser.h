@@ -7,6 +7,7 @@ struct Guesser
 {
     virtual void reset() {};
     virtual int makeGuess(int guess, Response response) = 0;
+    virtual ~Guesser() = default;
 };
 
 #endif // GUESSER_H_INCLUDED

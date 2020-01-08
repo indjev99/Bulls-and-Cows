@@ -7,6 +7,7 @@ struct Thinker
 {
     virtual void reset() {};
     virtual Response getResponse(int guess) = 0;
+    virtual ~Thinker() = default;
 };
 
 #endif // THINKER_H_INCLUDED

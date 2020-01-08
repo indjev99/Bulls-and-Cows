@@ -40,8 +40,6 @@
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/mcts.cpp" />
 		<Unit filename="src/mcts.h" />
-		<Unit filename="src/number_range.h" />
-		<Unit filename="src/params.h" />
 		<Unit filename="src/play.cpp" />
 		<Unit filename="src/play.h" />
 		<Unit filename="src/random_guesser.cpp" />
